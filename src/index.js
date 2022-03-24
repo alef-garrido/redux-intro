@@ -1,16 +1,11 @@
-// FUNCTION COMPOSITION
-  // Probem: Given an input string, retund a trimmed string wrapped inside a div element
+import { compose, pipe } from 'lodash/fp'; // lodash functional programming package
+
 let input = '   JavaScript  ';
-
-  //non-functional approach
-// let output = "<div>" + input.trim() + "</div>";
-
-
-  // Funtional approach
-//trim
+  
 const trim = str => str.trim();
-//wrap inside div
-const wrapDiv = str => `<div>${str}</div>`;
+const wrap = type => str => `<${type}>${str}</${type}>`;
 const toLowerCase = str => str.toLowerCase();
 
-wrapDiv(trim(input));
+const transform = pipe(trim, toLowerCase, wrap('div')); 
+console.log(transform(input));
+  
