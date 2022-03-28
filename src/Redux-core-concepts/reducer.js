@@ -36,6 +36,8 @@ const reducer = (state = [], action) => {
           ];
     case actions.BUG_REMOVED:
       return state.filter(bug => bug.id !== action.payload.id );
+    case actions.BUG_RESOLVED:
+      return state.map(bug => bug.id !== action.payload.id ? bug : { ...bug, resolved: !bug.resolved }) // Messy code should be replaced with a modern sytax or library to handle immutability
     default: 
       return state
   };
