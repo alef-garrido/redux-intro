@@ -22,7 +22,7 @@
 // Reducer made with switch statement - most common
 
 let lastid = 0;
-const reducer = (state = [], action) {
+const reducer = (state = [], action) => {
   switch(action.type) {
     case "bugAdded":
       return [
@@ -31,7 +31,7 @@ const reducer = (state = [], action) {
               id: ++lastid,
               description: action.payload.description,
               resolvec: false
-            }
+            },
           ];
     case "bugRemoved":
       return state.filter(bug => bug.id !== action.payload.if );
