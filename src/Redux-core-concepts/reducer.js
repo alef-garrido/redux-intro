@@ -20,22 +20,25 @@
 // }
 
 // Reducer made with switch statement - most common
+import * as actions from './actionTypes';
 
-let lastid = 0;
+let lastId = 0;
 const reducer = (state = [], action) => {
   switch(action.type) {
-    case "bugAdded":
+    case actions.BUG_ADDED:
       return [
             ...state,
             {
-              id: ++lastid,
+              id: ++lastId,
               description: action.payload.description,
-              resolvec: false
+              resolved: false,
             },
           ];
-    case "bugRemoved":
-      return state.filter(bug => bug.id !== action.payload.if );
+    case actions.BUG_REMOVED:
+      return state.filter(bug => bug.id !== action.payload.id );
     default: 
       return state
   };
 };
+
+export default reducer;
