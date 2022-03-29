@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
   mode: "development",
+  devtool: "source-map",
   optimization: {
     minimize: true,
   },
