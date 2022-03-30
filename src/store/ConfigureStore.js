@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './projects-dux';
+import reducer from './reducer';
 
 export default function() {
-  return configureStore({ reducer: reducer });
+  return configureStore({ reducer });
 };  
 
