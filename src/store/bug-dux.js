@@ -5,13 +5,11 @@ const bugAdded = createAction('BUG_ADDED');
 const bugRemoved = createAction('BUG_REMOVED');
 const bugResolved = createAction('BUG_RESOLVED');
 
-console.log(bugAdded)
-
 // Reducer
 let lastId = 0;
 export default function reducer(state = [], action) {
   switch(action.type) {
-    case BUG_ADDED:
+    case bugAdded.type:
       return [
             ...state,
             {
@@ -20,9 +18,9 @@ export default function reducer(state = [], action) {
               resolved: false,
             },
           ];
-    case BUG_REMOVED:
+    case bugRemoved.type:
       return state.filter(bug => bug.id !== action.payload.id );
-    case BUG_RESOLVED:
+    case bugResolved.type:
       return state.map(bug => bug.id !== action.payload.id ? bug : { ...bug, resolved: !bug.resolved }) // Messy code should be replaced with a modern sytax or library to handle immutability
     default: 
       return state
