@@ -1,31 +1,11 @@
-// Action types
-const BUG_ADDED = 'bugAdded';
-const BUG_REMOVED = 'bugRemoved';
-const BUG_RESOLVED = 'bugResolved';
+import { createAction } from "@reduxjs/toolkit";
 
+//Action creators - this function now return action creator functions
+const bugAdded = createAction('BUG_ADDED');
+const bugRemoved = createAction('BUG_REMOVED');
+const bugResolved = createAction('BUG_RESOLVED');
 
-//Action creators
-export const bugAdded = (description) => ({
-  type: BUG_ADDED,
-  payload: {
-    description
-  }
-});
-
-export const bugRemoved = (id) => ({
-  type: BUG_REMOVED,
-  payload: {
-    id
-  }
-})
-
-export const bugResolved = (id) => ({
-  type: BUG_RESOLVED,
-  payload: {
-    id
-  }
-});
-
+console.log(bugAdded)
 
 // Reducer
 let lastId = 0;
