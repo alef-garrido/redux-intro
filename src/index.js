@@ -1,11 +1,7 @@
 import configureStore from './store/ConfigureStore';
-import * as actions from './store/api';
- 
+import { loadBugs } from './store/bug-dux';
+
 const store = configureStore();
 
-store.dispatch(
-  actions.apiCallBegan({
-  url: "/bugs",
-  onSucces: "bugsReceived",
-  })
-);
+store.dispatch(loadBugs());
+

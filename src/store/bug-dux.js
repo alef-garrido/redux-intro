@@ -1,36 +1,59 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector, cresteSelector } from 'reselect';
+import apiCallBegan from './api'
 
 let lastId = 0;
 const slice = createSlice({
   name: "bugs",
-  initialState: [],
+  initialState:  {
+    list: [],
+    loading: false,
+    lastFetch: null
+  },
   reducers: {
+    bugsReceived: (state, action) => {
+      state.list = action.payload;
+    },
     bugAssignedToUser: (state, action) => {
       const { bugId, userId } = action.payload;
-      const index = state.findIndex(bug => bug.id === bugId)
-      state[index].userId = userId;
+      const index = state.list.findIndex(bug => bug.id === bugId)
+      state.list[index].userId = userId;
     },
     bugAdded: (state, action) => {
-      state.push({
+      state.list.push({
         id: ++lastId,
         description: action.payload.description,
         resolved: false,
       });
     },
     bugRemoved: (state, action) => {
-      state.filter((bug) => bug.id !== action.type.id);
+      state.list.filter((bug) => bug.id !== action.type.id);
     },
     bugResolved: (state, action) => {
-      const index = state.findIndex((bug) => bug.id === action.payload.id);
-      state[index].resolved = true;
+      const index = state.list.findIndex((bug) => bug.id === action.payload.id);
+      state.list[index].resolved = true;
     },
   },
 });
 
 
-export const { bugAdded, bugRemoved, bugResolved, bugAssignedToUser } = slice.actions;
+export const { 
+  bugAdded, 
+  bugRemoved, 
+  bugResolved, 
+  bugAssignedToUser, 
+  bugsReceived 
+} = slice.actions;
 export default slice.reducer;
+
+// ACtion Creators
+const url = "/bugs"
+
+export const loadBugs = () => apiCallBegan({
+  url,
+  onSuccess: bugsReceive.type
+})
+
 
 // Selectors
 // export const getUnresolvedBugs = (state) => state.entities.bugs.filter(bug => !bug.resolved);
