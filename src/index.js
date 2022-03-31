@@ -1,10 +1,11 @@
 import configureStore from './store/ConfigureStore';
+import * as actions from './store/api';
  
 const store = configureStore();
 
-store.dispatch({
-  type: 'error',
-  payload: { message: 'An error ocurred'}
-});
-
-
+store.dispatch(
+  actions.apiCallBegan({
+  url: "/bugs",
+  onSucces: "bugsReceived",
+  })
+);
